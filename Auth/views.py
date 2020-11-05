@@ -14,6 +14,7 @@ def checkLogin(request):
 
 def index(request):
     checkLogin(request)
+    print(request.session.keys())
     return render(request,'index.html',{'login':request.session['login']})
 
 def signUp(request):

@@ -1,7 +1,7 @@
+
 let products = [];
 let temp=[];
 p=document.querySelectorAll(".product");
-console.log(p);
 for(i=0;i<p.length;i++){
     let title=p[i].querySelector(".card-title").innerHTML;
     let detail=p[i].querySelector(".card-text").innerHTML;
@@ -10,7 +10,6 @@ for(i=0;i<p.length;i++){
     temp.push({'title':title,'detail':detail,'slug':slug,'id':id,'quantity':0});
 }
 products=temp;
-console.log(temp);
 
 function renderCart(cart) {
     const cartList = document.getElementById('cart-list');
@@ -67,6 +66,7 @@ function renderCart(cart) {
   
   function presistCart(cart) {
     window.localStorage.setItem('cart', JSON.stringify(cart));
+    
   }
   
   function rehydrateCart() {
