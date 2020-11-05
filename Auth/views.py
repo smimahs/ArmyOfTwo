@@ -8,8 +8,13 @@ from django.shortcuts import render,get_object_or_404
 
 
 # Create your views here.
+def checkLogin(request):
+    if not 'login' in request.session.keys():
+        request.session['login']=False
+
 def index(request):
-    return render(request,'index.html')
+    checkLogin(request)
+    return render(request,'index.html',{'login':request.session['login']})
 
 def signUp(request):
     if request.method == 'GET':
@@ -61,22 +66,39 @@ def signIn(request):
                 password=request.POST.get("password")
                 user=Clients.objects.filter(email=email).first()
                 if(user.password == password):
+                    request.session['login']=True
+                    request.session['email']=email
                     return redirect(index)
          
     return render(request,'signin.html', {"form": form})
 
+def logout(request):
+    request.session['login']=False
+    del request.session['email']
+    return redirect(signIn)
+
 def blog(request):
+    checkLogin(request)
     posts=Post.objects.all()
-    return render(request,'blog.html',{'posts':posts})
+    return render(request,'blog.html',{'posts':posts,'login':request.session['login']})
 
 def post(request,slug):
-    return render(None,'post.html', {'post':get_object_or_404(Post,slug=slug)})
+    checkLogin(request)
+    return render(None,'post.html', {'post':get_object_or_404(Post,slug=slug),'login':request.session['login']})
 
 def shop(request):
+    checkLogin(request)
     products=Product.objects.all()
-    return render(request,'shop.html',{'products':products})
+    return render(request,'shop.html',{'products':products,'login':request.session['login']})
 
 def product(request,slug):
-    return render(None,'product.html', {'product':get_object_or_404(Product,slug=slug)})
+    checkLogin(request)
+    return render(None,'product.html', {'product':get_object_or_404(Product,slug=slug),'login':request.session['login']})
+
+def getProduct():
+    products=Product.objects.all()
+    return products
+
+
 
 
