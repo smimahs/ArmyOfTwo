@@ -38,22 +38,7 @@ def signUp(request):
 
     return render(request,'signup.html', {"form": form})   
 
-'''
-def signUpEmployee(request):
-    if request.method == 'GET':
-        return render(request,'signup.html')
-    elif request.method == 'POST':
-        email=request.POST.get("email")
-        if (not Employer.objects.get(email=email)):
-            name=request.POST['name']
-            companyName=request.POST['companyName']
-            pasword=request.POST['pasword']
-            cpasword=request.POST['cpasword']
-            user = Employer(name=name, companyName=companyName, email=email, pasword=pasword, cpasword=cpasword, is_active=False)
-            user.save()  
-            email = EmailMessage('Activation Email', 'Body', to=[email])
-            email.send()          
-'''
+
 
 def signIn(request):
     if request.method == 'GET':
