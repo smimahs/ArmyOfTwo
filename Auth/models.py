@@ -13,21 +13,7 @@ class Clients(models.Model):
 
     def __str__(self):
         return self.name
-'''
-class Employee(models.Model):
-    id=models.IntegerField(primary_key=True)
-    name=models.CharField(max_length=150)
-    companyName=models.CharField(max_length=150)
-    email=models.CharField(max_length=150)
-    mobile=models.CharField(max_length=11)
-    password=models.CharField(max_length=20)
-    cpassword=models.CharField(max_length=20)
-    is_active=models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.companyName
-
-'''
 class Post(models.Model):
 
     title=models.CharField(max_length=250)
